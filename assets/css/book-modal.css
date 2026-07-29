@@ -1,0 +1,395 @@
+/* ================================================================
+   B.F.C. HILLOWTON ESTATES — book-modal.css
+   "Book Your Villa" modal — triggered by every BOOK NOW button
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   OVERLAY — full screen backdrop
+---------------------------------------------------------------- */
+.bv-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 18, 38, 0.55);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.30s ease, visibility 0.30s ease;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.bv-overlay.bv-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ----------------------------------------------------------------
+   MODAL PANEL
+---------------------------------------------------------------- */
+.bv-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  transform: translate(-50%, -46%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.32s cubic-bezier(0.34, 1.36, 0.64, 1),
+              opacity 0.28s ease,
+              visibility 0.28s ease;
+
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background: #ECECEC;
+  border-radius: 24px;
+  padding: 44px 36px 32px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+
+  /* hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.bv-modal::-webkit-scrollbar {
+  display: none;
+}
+
+.bv-modal.bv-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%);
+}
+
+/* Prevent body scroll when modal open */
+body.bv-no-scroll {
+  overflow: hidden;
+}
+
+/* ----------------------------------------------------------------
+   CLOSE BUTTON  ×
+---------------------------------------------------------------- */
+.bv-close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  font-size: 22px;
+  border-radius: 50%;
+  transition: background 0.18s, color 0.18s;
+  line-height: 1;
+  padding: 0;
+}
+
+.bv-close:hover {
+  background: rgba(0,0,0,0.08);
+  color: var(--dark-text);
+}
+
+/* ----------------------------------------------------------------
+   MODAL TITLE
+---------------------------------------------------------------- */
+.bv-title {
+  font-family: var(--font);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--dark-text);
+  text-align: center;
+  margin-bottom: 32px;
+  line-height: 1.15;
+}
+
+.bv-title span {
+  color: var(--teal);
+}
+
+/* ----------------------------------------------------------------
+   FORM FIELDS
+---------------------------------------------------------------- */
+.bv-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Label */
+.bv-label {
+  display: block;
+  font-family: var(--font);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--dark-text);
+  margin-bottom: 8px;
+  letter-spacing: 0.1px;
+}
+
+/* Base input / select / textarea */
+.bv-input,
+.bv-select,
+.bv-textarea {
+  width: 100%;
+  background: #E5E5E5;
+  border: 1.5px solid #d8d8d8;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--dark-text);
+  outline: none;
+  transition: border-color 0.22s, box-shadow 0.22s, background 0.18s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.bv-input::placeholder,
+.bv-textarea::placeholder {
+  color: #a0a8b4;
+  font-size: 13.5px;
+}
+
+.bv-input:focus,
+.bv-select:focus,
+.bv-textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(81, 188, 192, 0.15);
+  background: #ffffff;
+}
+
+.bv-input.bv-error,
+.bv-select.bv-error,
+.bv-textarea.bv-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.10);
+}
+
+/* Date input icon */
+.bv-date-wrap {
+  position: relative;
+}
+
+.bv-date-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #999;
+  pointer-events: none;
+}
+
+.bv-input-date {
+  padding-right: 44px;
+  cursor: pointer;
+}
+
+/* hide native date icon on webkit */
+.bv-input-date::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* Two-column row: Adults + Children */
+.bv-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Select dropdown */
+.bv-select-wrap {
+  position: relative;
+}
+
+.bv-select {
+  padding-right: 40px;
+  cursor: pointer;
+  background-color: #E5E5E5;
+  color: var(--dark-text);
+}
+
+.bv-select option {
+  color: var(--dark-text);
+}
+
+.bv-select-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: #888;
+  pointer-events: none;
+}
+
+/* Textarea */
+.bv-textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+/* ----------------------------------------------------------------
+   ERROR MESSAGES
+---------------------------------------------------------------- */
+.bv-err {
+  font-size: 11.5px;
+  color: #e74c3c;
+  margin-top: 5px;
+  display: none;
+}
+
+.bv-err.show {
+  display: block;
+}
+
+/* ----------------------------------------------------------------
+   CONTINUE BUTTON
+---------------------------------------------------------------- */
+.bv-submit-wrap {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.bv-submit-btn {
+  display: inline-block;
+  background: var(--teal);
+  color: #ffffff;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 16px 52px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.24s, transform 0.18s, box-shadow 0.2s;
+  box-shadow: 0 6px 24px rgba(81, 188, 192, 0.28);
+}
+
+.bv-submit-btn:hover {
+  background: var(--teal-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(81, 188, 192, 0.38);
+}
+
+.bv-submit-btn:active {
+  transform: translateY(0);
+}
+
+.bv-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ----------------------------------------------------------------
+   DISCLAIMER TEXT at bottom
+---------------------------------------------------------------- */
+.bv-disclaimer {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #888;
+  text-align: center;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  line-height: 1.65;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #d8d8d8;
+}
+
+/* ----------------------------------------------------------------
+   SUCCESS STATE inside modal
+---------------------------------------------------------------- */
+.bv-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px 20px;
+  gap: 16px;
+}
+
+.bv-success.show {
+  display: flex;
+}
+
+.bv-success-icon {
+  font-size: 52px;
+  color: var(--teal);
+}
+
+.bv-success-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dark-text);
+}
+
+.bv-success-text {
+  font-size: 14px;
+  color: var(--mid-text);
+  line-height: 1.7;
+  max-width: 320px;
+}
+
+.bv-success-close {
+  margin-top: 10px;
+  display: inline-block;
+  background: var(--teal);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 13px 36px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.22s;
+}
+
+.bv-success-close:hover {
+  background: var(--teal-dark);
+}
+
+/* ----------------------------------------------------------------
+   RESPONSIVE
+---------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .bv-modal {
+    max-width: calc(100vw - 24px);
+    padding: 36px 22px 28px;
+    border-radius: 18px;
+    max-height: 88vh;
+  }
+
+  .bv-title     { font-size: 26px; margin-bottom: 24px; }
+  .bv-row-2     { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .bv-submit-btn{ padding: 14px 40px; font-size: 12.5px; }
+  .bv-disclaimer{ font-size: 9.5px; }
+}
+
+@media (max-width: 400px) {
+  .bv-title   { font-size: 22px; }
+  .bv-row-2   { grid-template-columns: 1fr; }
+  .bv-label   { font-size: 12.5px; }
+  .bv-input,
+  .bv-select  { padding: 12px 14px; font-size: 13px; }
+}
